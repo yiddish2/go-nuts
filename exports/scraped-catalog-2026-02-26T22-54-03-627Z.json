@@ -1,0 +1,310 @@
+{
+  "sourceSiteUrl": "https://go-nuts.shop",
+  "sourceSupabaseUrl": "https://rrbmylhmxcgyxzaegrlc.supabase.co",
+  "nuts": [
+    {
+      "name": "Almonds Roasted (No Salt)",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/f4f5ee1d-b98b-485a-8b21-467bafcd88d1.avif",
+      "price_per_ounce": 0.49,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Almonds, Raw",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/801469c0-1f4e-4f1c-8838-4d35767bbb58.avif",
+      "price_per_ounce": 0.45,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Almonds, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/d649ce9f-87d8-4c6f-adfe-11325e44259a.avif",
+      "price_per_ounce": 0.49,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Apricots, Turkish Dried #4",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/b8a6acaf-2ac1-4412-bcd8-3ea1418813eb.jpg",
+      "price_per_ounce": 0.79,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Blueberries, Dried",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/857d2082-33fd-4ea3-b946-a4666df7b996.avif",
+      "price_per_ounce": 0.69,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Brazil Nuts, Roasted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/293b6f93-e0cf-4f87-90af-8ccc5f515987.avif",
+      "price_per_ounce": 0.99,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Cashews, Raw",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/2ee2a68e-0172-4386-a408-34b6cf084c46.avif",
+      "price_per_ounce": 0.61,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Cashews, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/d5158f21-a00d-47ce-862e-290aa2757fdc.avif",
+      "price_per_ounce": 0.63,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Coconut Chips",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/1e4b43a4-8802-4160-a187-f08fc4f07760.avif",
+      "price_per_ounce": 0.48,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Cranberry Trail Mix",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/49cd6616-3bef-4c82-b86a-e0738db1a512.jpeg",
+      "price_per_ounce": 0.59,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Diced Mango",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/a0d0441f-b4e7-4c3f-b4a4-a9cd8cd05020.avif",
+      "price_per_ounce": 0.32,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Dried Cranberries",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/41204e53-7eff-4e8c-9cfe-69c8c5e688fd.avif",
+      "price_per_ounce": 0.46,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": "Cranberries, Cane Sugar, Sunflower Oil (Less than 1%)."
+    },
+    {
+      "name": "Dried Kiwi",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/c447b206-6b87-4f4b-bbc2-b3589d389a76.png",
+      "price_per_ounce": 0.59,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": "Kiwi, Sugar, Citric Acid, FD&C Blue #1, Yellow #5, Sodium Metabisulphite"
+    },
+    {
+      "name": "Ginger Crystalized",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/3e66ac5b-5aa6-47ef-9cbe-ec7f2c10c007.avif",
+      "price_per_ounce": 0.48,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Hazelnuts (Blanched Filberts)",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/88cad56b-c982-457b-be39-3e9d6a5ceeb4.avif",
+      "price_per_ounce": 0.99,
+      "in_stock": false,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Macadamia Nuts, Raw",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/ef333e9c-1ca4-4be7-b2e6-583ce010594a.avif",
+      "price_per_ounce": 0.72,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Macadamia Nuts, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/634ee3e5-7d28-4903-8046-8a3a5ae4234a.avif",
+      "price_per_ounce": 0.74,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Mango Slices",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/8bcdfc22-ce27-47eb-850d-1aabe0407912.png",
+      "price_per_ounce": 0.53,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Papaya Chunks",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/1c061dbb-05da-48b7-9507-1aec6ef33ccb.png",
+      "price_per_ounce": 0.43,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Papaya, Diced",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/a5222fa3-6e23-43ae-b59f-d536d1e221ee.avif",
+      "price_per_ounce": 0.45,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Peanuts, Raw Blanched",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/b9bd1bac-1b41-44fc-a292-65eeb4819469.webp",
+      "price_per_ounce": 0.25,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Peanuts, Roasted (Unsalted)",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/f5b9fa29-72a9-4aff-a99c-6447ef45c067.webp",
+      "price_per_ounce": 0.32,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Peanuts, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/b798d4a5-09d7-442e-a09b-8b9ace06256c.webp",
+      "price_per_ounce": 0.32,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Pecan Halves",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/5524dc6a-2b8b-471d-8042-9ceb850e0e7a.avif",
+      "price_per_ounce": 0.77,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Pecan Large Pieces",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/daeb3a15-3aa9-4f22-8961-219faf56e1f1.avif",
+      "price_per_ounce": 0.67,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Pineapple Rings",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/7c2d5ea0-b1a3-4e23-9687-1e97ee210c5a.png",
+      "price_per_ounce": 0.48,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Pineapple, Diced",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/fc1876cc-42a8-4bbe-8122-67d9dc3f71ca.avif",
+      "price_per_ounce": 0.45,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Pistachios, Roasted (Unsalted)",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/931dec64-3543-462a-99b1-51f30794ba0e.avif",
+      "price_per_ounce": 0.74,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Pistachios, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/d90d3852-8624-445a-8f18-50bd218d6f99.avif",
+      "price_per_ounce": 0.74,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": "Pistachios, Sea Salt"
+    },
+    {
+      "name": "Pitted Dates",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/c4aed71e-9995-48a5-bbae-cf4692ffa438.avif",
+      "price_per_ounce": 0.29,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Pumpkin Seeds, Raw",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/421fe643-919d-4356-a084-70c7267bfb2d.avif",
+      "price_per_ounce": 0.49,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Pumpkin Seeds, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/7bec9d1e-85cf-4224-9b50-06bcc5066346.avif",
+      "price_per_ounce": 0.65,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Raisins",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/cab1c875-f0e3-4b9d-837f-fe03594df2b3.avif",
+      "price_per_ounce": 0.29,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Strawberries, Dried",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/b25cfb1d-c201-452b-8dbd-27cb757937ad.avif",
+      "price_per_ounce": 0.65,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Sunflower Seeds, Raw",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/d1239001-8373-4f6e-a52d-68e2e25bcf0b.avif",
+      "price_per_ounce": 0.39,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    },
+    {
+      "name": "Sunflower Seeds, Roasted & Salted",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/9c18dec8-1cf8-4343-95fd-1dc5bc34ce1b.avif",
+      "price_per_ounce": 47,
+      "in_stock": true,
+      "nutrition_facts": null,
+      "ingredients": null
+    },
+    {
+      "name": "Sweetened Banana Chips",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/c92e4b1f-a889-4edb-888a-16f820777244.avif",
+      "price_per_ounce": 0.28,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":0,\"totalFat\":0,\"saturatedFat\":0,\"transFat\":null,\"cholesterol\":0,\"sodium\":0,\"totalCarbs\":null,\"dietaryFiber\":0,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": "Banana, Coconut Oil, Refined Cane Sugar, Natural Banana Flavor."
+    },
+    {
+      "name": "Walnuts, Raw",
+      "image": "https://rrbmylhmxcgyxzaegrlc.supabase.co/storage/v1/object/public/nut-images/acc012e2-4737-4989-97ef-2f92d3edc495.avif",
+      "price_per_ounce": 0.45,
+      "in_stock": true,
+      "nutrition_facts": "{\"calories\":null,\"totalFat\":null,\"saturatedFat\":null,\"transFat\":null,\"cholesterol\":null,\"sodium\":null,\"totalCarbs\":null,\"dietaryFiber\":null,\"totalSugars\":null,\"protein\":null}",
+      "ingredients": null
+    }
+  ]
+}
