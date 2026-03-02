@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, Package } from "lucide-react";
@@ -37,14 +37,53 @@ type Order = {
   notes: string | null;
   payment_method: string | null;
   order_number: number;
+  shipping_address1: string | null;
+  shipping_address2: string | null;
+  shipping_city: string | null;
+  shipping_state: string | null;
+  shipping_zip: string | null;
+  shipping_country: string | null;
+  shipping_phone: string | null;
+  shipping_weight_oz: number | null;
+  shipping_length_in: number | null;
+  shipping_width_in: number | null;
+  shipping_height_in: number | null;
+  shipengine_tracking_number: string | null;
+  shipengine_label_url: string | null;
+  shipengine_label_created_at: string | null;
+  shipengine_service_code: string | null;
   order_items: OrderItem[];
 };
 
 const STATUS_CYCLE = ["pending", "completed", "cancelled"];
 
+const csvEscape = (value: string | number | null | undefined) => {
+  const text = value === null || value === undefined ? "" : String(value);
+  const escaped = text.replace(/"/g, '""');
+  return `"${escaped}"`;
+};
+
+const buildItemsSummary = (items: OrderItem[]) =>
+  items.map((item) => `${item.quantity}x ${item.item_name}`).join("; ");
+
 export default function AdminOrders() {
   const queryClient = useQueryClient();
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [labelWeight, setLabelWeight] = useState("");
+  const [labelLength, setLabelLength] = useState("");
+  const [labelWidth, setLabelWidth] = useState("");
+  const [labelHeight, setLabelHeight] = useState("");
+  const [labelService, setLabelService] = useState("usps_ground_advantage");
+  const [creatingLabel, setCreatingLabel] = useState(false);
+
+  useEffect(() => {
+    if (!selectedOrder) return;
+    setLabelWeight(selectedOrder.shipping_weight_oz ? String(selectedOrder.shipping_weight_oz) : "");
+    setLabelLength(selectedOrder.shipping_length_in ? String(selectedOrder.shipping_length_in) : "");
+    setLabelWidth(selectedOrder.shipping_width_in ? String(selectedOrder.shipping_width_in) : "");
+    setLabelHeight(selectedOrder.shipping_height_in ? String(selectedOrder.shipping_height_in) : "");
+    setLabelService(selectedOrder.shipengine_service_code || "usps_ground_advantage");
+  }, [selectedOrder?.id]);
 
   const { data: orders, isLoading } = useQuery({
     queryKey: ["admin-orders"],
@@ -102,11 +141,105 @@ export default function AdminOrders() {
     }
   };
 
+  const exportCsv = () => {
+    if (!orders || orders.length === 0) return;
+    const headers = [
+      "Order Number",
+      "Created At",
+      "Customer Name",
+      "Email",
+      "Phone",
+      "Address 1",
+      "Address 2",
+      "City",
+      "State",
+      "ZIP",
+      "Country",
+      "Items",
+      "Total",
+      "Status",
+    ];
+    const rows = orders.map((order) => [
+      order.order_number,
+      new Date(order.created_at).toISOString(),
+      order.customer_name,
+      order.customer_email,
+      order.shipping_phone,
+      order.shipping_address1,
+      order.shipping_address2,
+      order.shipping_city,
+      order.shipping_state,
+      order.shipping_zip,
+      order.shipping_country,
+      buildItemsSummary(order.order_items),
+      order.total_price.toFixed(2),
+      order.status,
+    ]);
+    const csv = [
+      headers.map(csvEscape).join(","),
+      ...rows.map((row) => row.map(csvEscape).join(",")),
+    ].join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `go-nuts-orders-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const createLabel = async () => {
+    if (!selectedOrder) return;
+    const weightOz = Number(labelWeight);
+    if (!Number.isFinite(weightOz) || weightOz <= 0) {
+      toast.error("Enter a valid weight in ounces.");
+      return;
+    }
+
+    setCreatingLabel(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-shipping-label", {
+        body: {
+          orderId: selectedOrder.id,
+          package: {
+            weight_oz: weightOz,
+            length_in: labelLength ? Number(labelLength) : null,
+            width_in: labelWidth ? Number(labelWidth) : null,
+            height_in: labelHeight ? Number(labelHeight) : null,
+          },
+          service_code: labelService,
+          label_format: "pdf",
+          label_layout: "4x6",
+        },
+      });
+      if (error) throw error;
+      if (!data?.ok) throw new Error("Label creation failed.");
+      toast.success("Label created.");
+      queryClient.invalidateQueries({ queryKey: ["admin-orders"] });
+    } catch (err: any) {
+      toast.error(err?.message || "Failed to create label.");
+      console.error(err);
+    } finally {
+      setCreatingLabel(false);
+    }
+  };
+
   return (
     <div className="space-y-4">
-      <h2 className="text-display text-xl font-bold text-foreground">
-        Orders ({orders.length})
-      </h2>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-display text-xl font-bold text-foreground">
+          Orders ({orders.length})
+        </h2>
+        <button
+          onClick={exportCsv}
+          className="rounded-full border border-border bg-background px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-secondary"
+        >
+          Export CSV (Pirate Ship)
+        </button>
+      </div>
       <p className="text-xs text-muted-foreground">Click status to change · Double-click row for details</p>
       <div className="rounded-lg border bg-card">
         <Table>
@@ -205,6 +338,86 @@ export default function AdminOrders() {
                 <div>
                   <span className="text-muted-foreground">Payment</span>
                   <p className="font-medium text-foreground">{selectedOrder.payment_method || "—"}</p>
+                </div>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Shipping</span>
+                <div className="mt-1 space-y-1 text-foreground">
+                  <div>{selectedOrder.customer_name || "—"}</div>
+                  <div>{selectedOrder.shipping_address1 || "—"}</div>
+                  {selectedOrder.shipping_address2 && <div>{selectedOrder.shipping_address2}</div>}
+                  <div>
+                    {[selectedOrder.shipping_city, selectedOrder.shipping_state, selectedOrder.shipping_zip]
+                      .filter(Boolean)
+                      .join(", ") || "—"}
+                  </div>
+                  <div>{selectedOrder.shipping_country || "—"}</div>
+                  {selectedOrder.shipping_phone && (
+                    <div className="text-muted-foreground">Phone: {selectedOrder.shipping_phone}</div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <span className="text-muted-foreground">Shipping Label</span>
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                  <input
+                    placeholder="Weight (oz)"
+                    inputMode="decimal"
+                    value={labelWeight}
+                    onChange={(e) => setLabelWeight(e.target.value)}
+                    className="rounded-lg border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
+                  />
+                  <input
+                    placeholder="Service code (e.g., usps_ground_advantage)"
+                    value={labelService}
+                    onChange={(e) => setLabelService(e.target.value)}
+                    className="rounded-lg border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
+                  />
+                  <input
+                    placeholder="Length (in)"
+                    inputMode="decimal"
+                    value={labelLength}
+                    onChange={(e) => setLabelLength(e.target.value)}
+                    className="rounded-lg border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
+                  />
+                  <input
+                    placeholder="Width (in)"
+                    inputMode="decimal"
+                    value={labelWidth}
+                    onChange={(e) => setLabelWidth(e.target.value)}
+                    className="rounded-lg border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
+                  />
+                  <input
+                    placeholder="Height (in)"
+                    inputMode="decimal"
+                    value={labelHeight}
+                    onChange={(e) => setLabelHeight(e.target.value)}
+                    className="rounded-lg border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={createLabel}
+                    disabled={creatingLabel}
+                    className="rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground disabled:opacity-60"
+                  >
+                    {creatingLabel ? "Creating…" : "Create Label (PDF 4x6)"}
+                  </button>
+                  {selectedOrder.shipengine_label_url && (
+                    <a
+                      href={selectedOrder.shipengine_label_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-semibold text-primary underline"
+                    >
+                      Download Label
+                    </a>
+                  )}
+                  {selectedOrder.shipengine_tracking_number && (
+                    <span className="text-xs text-muted-foreground">
+                      Tracking: {selectedOrder.shipengine_tracking_number}
+                    </span>
+                  )}
                 </div>
               </div>
               {selectedOrder.notes && (

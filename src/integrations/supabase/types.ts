@@ -237,6 +237,24 @@ export type Database = {
           notes: string | null
           order_number: number
           payment_method: string | null
+          shipengine_carrier_id: string | null
+          shipengine_label_created_at: string | null
+          shipengine_label_id: string | null
+          shipengine_label_url: string | null
+          shipengine_service_code: string | null
+          shipengine_shipment_id: string | null
+          shipengine_tracking_number: string | null
+          shipping_address1: string | null
+          shipping_address2: string | null
+          shipping_city: string | null
+          shipping_country: string | null
+          shipping_height_in: number | null
+          shipping_length_in: number | null
+          shipping_phone: string | null
+          shipping_state: string | null
+          shipping_weight_oz: number | null
+          shipping_width_in: number | null
+          shipping_zip: string | null
           status: string
           total_price: number
         }
@@ -248,6 +266,24 @@ export type Database = {
           notes?: string | null
           order_number?: number
           payment_method?: string | null
+          shipengine_carrier_id?: string | null
+          shipengine_label_created_at?: string | null
+          shipengine_label_id?: string | null
+          shipengine_label_url?: string | null
+          shipengine_service_code?: string | null
+          shipengine_shipment_id?: string | null
+          shipengine_tracking_number?: string | null
+          shipping_address1?: string | null
+          shipping_address2?: string | null
+          shipping_city?: string | null
+          shipping_country?: string | null
+          shipping_height_in?: number | null
+          shipping_length_in?: number | null
+          shipping_phone?: string | null
+          shipping_state?: string | null
+          shipping_weight_oz?: number | null
+          shipping_width_in?: number | null
+          shipping_zip?: string | null
           status?: string
           total_price?: number
         }
@@ -259,6 +295,24 @@ export type Database = {
           notes?: string | null
           order_number?: number
           payment_method?: string | null
+          shipengine_carrier_id?: string | null
+          shipengine_label_created_at?: string | null
+          shipengine_label_id?: string | null
+          shipengine_label_url?: string | null
+          shipengine_service_code?: string | null
+          shipengine_shipment_id?: string | null
+          shipengine_tracking_number?: string | null
+          shipping_address1?: string | null
+          shipping_address2?: string | null
+          shipping_city?: string | null
+          shipping_country?: string | null
+          shipping_height_in?: number | null
+          shipping_length_in?: number | null
+          shipping_phone?: string | null
+          shipping_state?: string | null
+          shipping_weight_oz?: number | null
+          shipping_width_in?: number | null
+          shipping_zip?: string | null
           status?: string
           total_price?: number
         }
