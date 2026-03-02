@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import AdminNuts from "@/components/admin/AdminNuts";
-import AdminContainers from "@/components/admin/AdminContainers";
 import AdminAllowedEmails from "@/components/admin/AdminAllowedEmails";
 import AdminLoginAttempts from "@/components/admin/AdminLoginAttempts";
 import AdminOrders from "@/components/admin/AdminOrders";
@@ -13,7 +12,7 @@ import { toast } from "sonner";
 
 export default function Admin() {
   const { user, isAdmin, loading, signIn, signUp } = useAuth();
-  const [tab, setTab] = useState<"nuts" | "containers" | "emails" | "logins" | "orders">("nuts");
+  const [tab, setTab] = useState<"nuts" | "emails" | "logins" | "orders">("nuts");
 
   // Auth form state
   const [isLogin, setIsLogin] = useState(true);
@@ -142,14 +141,6 @@ export default function Admin() {
             Manage Nuts
           </button>
           <button
-            onClick={() => setTab("containers")}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
-              tab === "containers" ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"
-            }`}
-          >
-            Manage Containers
-          </button>
-          <button
             onClick={() => setTab("emails")}
             className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
               tab === "emails" ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-secondary/80"
@@ -175,7 +166,7 @@ export default function Admin() {
           </button>
         </div>
 
-        {tab === "nuts" ? <AdminNuts /> : tab === "containers" ? <AdminContainers /> : tab === "emails" ? <AdminAllowedEmails /> : tab === "orders" ? <AdminOrders /> : <AdminLoginAttempts />}
+        {tab === "nuts" ? <AdminNuts /> : tab === "emails" ? <AdminAllowedEmails /> : tab === "orders" ? <AdminOrders /> : <AdminLoginAttempts />}
       </section>
       <Footer />
       <CartDrawer />
