@@ -201,6 +201,16 @@ export default function AdminOrders() {
 
     setCreatingLabel(true);
     try {
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
+      if (!sessionData.session) {
+        throw new Error("You must be logged in to create labels.");
+      }
+      const refresh = await supabase.auth.refreshSession();
+      if (refresh.error) {
+        throw refresh.error;
+      }
+
       const { data, error } = await supabase.functions.invoke("create-shipping-label", {
         body: {
           orderId: selectedOrder.id,
