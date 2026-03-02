@@ -56,6 +56,7 @@ type Order = {
 };
 
 const STATUS_CYCLE = ["pending", "completed", "cancelled"];
+const INVALID_SERVICE_CODES = new Set(["usps", "ups", "fedex", "stamps_com"]);
 
 const csvEscape = (value: string | number | null | undefined) => {
   const text = value === null || value === undefined ? "" : String(value);
@@ -199,6 +200,12 @@ export default function AdminOrders() {
       return;
     }
 
+    const normalizedService = labelService.trim().toLowerCase();
+    if (normalizedService && INVALID_SERVICE_CODES.has(normalizedService)) {
+      toast.error("Use a service code like usps_ground_advantage, not a carrier code like usps.");
+      return;
+    }
+
     setCreatingLabel(true);
     try {
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
@@ -220,7 +227,7 @@ export default function AdminOrders() {
             width_in: labelWidth ? Number(labelWidth) : null,
             height_in: labelHeight ? Number(labelHeight) : null,
           },
-          service_code: labelService,
+          service_code: normalizedService || null,
           label_format: "pdf",
           label_layout: "4x6",
         },

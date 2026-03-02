@@ -20,6 +20,18 @@ type LabelRequest = {
   carrier_id?: string | null;
 };
 
+type ShipEngineCarrier = {
+  carrier_id: string;
+  carrier_code: string;
+};
+
+type ShipEngineService = {
+  service_code: string;
+  is_international?: boolean;
+};
+
+const INVALID_SERVICE_CODES = new Set(["usps", "ups", "fedex", "stamps_com"]);
+
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
@@ -76,7 +88,8 @@ serve(async (req) => {
 
     const labelFormat = (body.label_format || "pdf") as "pdf" | "png" | "zpl";
     const labelLayout = (body.label_layout || "4x6") as "4x6" | "letter" | "A4" | "A6";
-    const serviceCode = body.service_code || "usps_ground_advantage";
+    const rawServiceCode = String(body.service_code || "").trim().toLowerCase();
+    let serviceCode = rawServiceCode && !INVALID_SERVICE_CODES.has(rawServiceCode) ? rawServiceCode : null;
 
     const db = createClient(supabaseUrl, serviceRoleKey, {
       auth: { autoRefreshToken: false, persistSession: false },
@@ -97,6 +110,7 @@ serve(async (req) => {
     }
 
     let carrierId = body.carrier_id || null;
+    let carrierCode: string | null = null;
     if (!carrierId) {
       const carrierRes = await fetch("https://api.shipengine.com/v1/carriers", {
         headers: { "API-Key": shipengineKey },
@@ -105,13 +119,65 @@ serve(async (req) => {
       if (!carrierRes.ok) {
         return json({ error: carrierData?.message || "Failed to fetch carriers" }, 400);
       }
-      const carriers: Array<{ carrier_id: string; carrier_code: string }> = carrierData?.carriers || [];
+      const carriers: ShipEngineCarrier[] = carrierData?.carriers || [];
       const preferred = ["stamps_com", "usps", "ups", "fedex"];
       const match = carriers.find((c) => preferred.includes(c.carrier_code));
-      carrierId = (match || carriers[0])?.carrier_id || null;
+      const chosenCarrier = match || carriers[0] || null;
+      carrierId = chosenCarrier?.carrier_id || null;
+      carrierCode = chosenCarrier?.carrier_code || null;
       if (!carrierId) {
         return json({ error: "No carrier accounts available" }, 400);
       }
+    } else {
+      const carrierRes = await fetch("https://api.shipengine.com/v1/carriers", {
+        headers: { "API-Key": shipengineKey },
+      });
+      if (carrierRes.ok) {
+        const carrierData = await carrierRes.json();
+        const carriers: ShipEngineCarrier[] = carrierData?.carriers || [];
+        carrierCode = carriers.find((c) => c.carrier_id === carrierId)?.carrier_code || null;
+      }
+    }
+
+    const servicesRes = await fetch(`https://api.shipengine.com/v1/carriers/${carrierId}/services`, {
+      headers: { "API-Key": shipengineKey },
+    });
+    const servicesData = await servicesRes.json();
+    if (!servicesRes.ok) {
+      return json({ error: servicesData?.message || "Failed to fetch carrier services" }, 400);
+    }
+
+    const services: ShipEngineService[] = servicesData?.services || [];
+    const availableCodes = new Set(services.map((s) => s.service_code).filter(Boolean));
+
+    if (serviceCode && !availableCodes.has(serviceCode)) {
+      const examples = services.slice(0, 6).map((s) => s.service_code);
+      return json(
+        {
+          error: `Invalid service_code '${serviceCode}' for this carrier.`,
+          valid_service_codes: examples,
+        },
+        400,
+      );
+    }
+
+    if (!serviceCode) {
+      const preferredByCarrier: Record<string, string[]> = {
+        usps: ["usps_ground_advantage", "usps_priority_mail", "usps_priority_mail_express"],
+        stamps_com: ["usps_ground_advantage", "usps_priority_mail", "usps_priority_mail_express"],
+        ups: ["ups_ground", "ups_next_day_air"],
+        fedex: ["fedex_ground", "fedex_2_day", "fedex_priority_overnight"],
+      };
+      const preferred = carrierCode ? preferredByCarrier[carrierCode] || [] : [];
+      serviceCode =
+        preferred.find((code) => availableCodes.has(code)) ||
+        services.find((s) => !s.is_international)?.service_code ||
+        services[0]?.service_code ||
+        null;
+    }
+
+    if (!serviceCode) {
+      return json({ error: "No valid service_code available for selected carrier" }, 400);
     }
 
     const packages: Record<string, unknown>[] = [
