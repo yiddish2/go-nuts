@@ -18,6 +18,13 @@ export default function Checkout() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [country] = useState("US");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     if (isSuccess) {
@@ -42,6 +49,15 @@ export default function Checkout() {
           body: {
             email,
             customerName: `${firstName} ${lastName}`.trim(),
+            shipping: {
+              address1,
+              address2: address2.trim() || null,
+              city,
+              state,
+              zip,
+              country,
+              phone: phone.trim() || null,
+            },
             origin: window.location.origin,
             items: items.map(({ product, quantity }) => ({
               name: product.name,
@@ -109,9 +125,27 @@ export default function Checkout() {
                   <input required placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
                   <input required placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
                   <input required type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:col-span-2" />
-                  <input required placeholder="Address" className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:col-span-2" />
-                  <input required placeholder="City" className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
-                  <input required placeholder="ZIP code" inputMode="numeric" onChange={(e) => { e.target.value = e.target.value.replace(/\D/g, ""); }} maxLength={10} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                  <input required placeholder="Address line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:col-span-2" />
+                  <input placeholder="Address line 2 (optional)" value={address2} onChange={(e) => setAddress2(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:col-span-2" />
+                  <input required placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                  <input
+                    required
+                    placeholder="State (e.g., NY)"
+                    value={state}
+                    onChange={(e) => setState(e.target.value.toUpperCase())}
+                    maxLength={2}
+                    className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  />
+                  <input
+                    required
+                    placeholder="ZIP code"
+                    inputMode="numeric"
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value.replace(/\D/g, ""))}
+                    maxLength={10}
+                    className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  />
+                  <input placeholder="Phone (optional)" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 sm:col-span-2" />
                 </div>
               </div>
 
