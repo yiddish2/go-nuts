@@ -1,1 +1,4 @@
 project_id = "rbwbzqusurjzaypxunak"
+
+[functions.create-shipping-label]
+verify_jwt = false

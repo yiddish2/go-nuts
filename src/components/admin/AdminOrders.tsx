@@ -217,8 +217,16 @@ export default function AdminOrders() {
       if (refresh.error) {
         throw refresh.error;
       }
+      const accessToken =
+        refresh.data.session?.access_token || sessionData.session.access_token;
+      if (!accessToken) {
+        throw new Error("Session expired. Please sign in again.");
+      }
 
       const { data, error } = await supabase.functions.invoke("create-shipping-label", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
         body: {
           orderId: selectedOrder.id,
           package: {
