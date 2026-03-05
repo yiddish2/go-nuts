@@ -22,6 +22,7 @@ export default function Header() {
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
           <a href="#products" className="text-muted-foreground transition-colors hover:text-foreground">Build a Bag</a>
           <a href="#about" className="text-muted-foreground transition-colors hover:text-foreground">About</a>
+          <a href="#contact" className="text-muted-foreground transition-colors hover:text-foreground">Contact</a>
           {isAdmin && (
             <Link to="/admin" className="flex items-center gap-1 text-primary transition-colors hover:text-primary/80">
               <Shield className="h-4 w-4" /> Admin

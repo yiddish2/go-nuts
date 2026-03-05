@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import HeroBanner from "@/components/HeroBanner";
 import CartDrawer from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
+import ContactSection from "@/components/ContactSection";
 import NutBuildCard from "@/components/NutBuildCard";
 import BagSummaryPanel from "@/components/BagSummaryPanel";
 import { Search, Loader2 } from "lucide-react";
@@ -208,6 +209,7 @@ const Index = () => {
         </div>
       </section>
 
+      <ContactSection />
       <Footer />
       <CartDrawer />
     </div>
