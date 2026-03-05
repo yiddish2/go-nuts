@@ -88,6 +88,9 @@ export default function BagSummaryPanel({
         >
           <ShoppingCart className="h-4 w-4" /> Add to Cart
         </button>
+        <p className="mt-2 text-center text-xs font-medium text-muted-foreground">
+          Flat $4.99 shipping on all orders
+        </p>
       </div>
     </div>
   );
