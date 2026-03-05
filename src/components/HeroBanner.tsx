@@ -9,6 +9,9 @@ export default function HeroBanner() {
       </div>
       <div className="container relative mx-auto flex min-h-[420px] items-center px-4 py-16 md:min-h-[500px]">
         <div className="max-w-lg animate-fade-in">
+          <p className="inline-flex rounded-full border border-primary-foreground/30 bg-primary-foreground/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-primary-foreground">
+            Flat $4.99 Shipping On All Orders
+          </p>
           <h1 className="text-4xl font-bold leading-tight text-primary-foreground md:text-5xl lg:text-6xl">
             Nature's Finest Nuts & Dried Fruits
           </h1>
