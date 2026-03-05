@@ -10,6 +10,8 @@ import { toast } from "sonner";
 
 export default function Checkout() {
   const { items, totalPrice, clearCart } = useCart();
+  const shippingFee = 4.99;
+  const orderTotal = totalPrice + shippingFee;
   const [searchParams] = useSearchParams();
   const [submitting, setSubmitting] = useState(false);
   const isSuccess = searchParams.get("success") === "1";
@@ -162,7 +164,7 @@ export default function Checkout() {
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 text-lg font-semibold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-50"
               >
                 {submitting ? <Loader2 className="h-5 w-5 animate-spin" /> : <ShieldCheck className="h-5 w-5" />}
-                Secure Checkout — ${totalPrice.toFixed(2)}
+                Secure Checkout — ${orderTotal.toFixed(2)}
               </button>
             </form>
 
@@ -190,10 +192,10 @@ export default function Checkout() {
                   <span>Subtotal</span><span>${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>Shipping</span><span>Free</span>
+                  <span>Shipping</span><span>${shippingFee.toFixed(2)}</span>
                 </div>
                 <div className="mt-2 flex justify-between border-t pt-2 text-lg font-bold text-foreground">
-                  <span>Total</span><span className="text-primary">${totalPrice.toFixed(2)}</span>
+                  <span>Total</span><span className="text-primary">${orderTotal.toFixed(2)}</span>
                 </div>
               </div>
             </div>

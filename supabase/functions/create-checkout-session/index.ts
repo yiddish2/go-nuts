@@ -13,6 +13,16 @@ type CheckoutItem = {
   price: number;
 };
 
+type ShippingInfo = {
+  address1: string;
+  address2?: string | null;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  phone?: string | null;
+};
+
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
@@ -43,20 +53,33 @@ serve(async (req) => {
   }
 
   try {
+    const shippingFee = 4.99;
     const body = await req.json();
     const email = String(body?.email || "").trim();
     const customerName = String(body?.customerName || "").trim();
     const origin = String(body?.origin || "").trim();
+    const shipping: ShippingInfo | null = body?.shipping || null;
     const items: CheckoutItem[] = Array.isArray(body?.items) ? body.items : [];
 
     if (!email || !origin || items.length === 0) {
       return json({ error: "Missing required checkout payload fields" }, 400);
     }
+    if (
+      !shipping ||
+      !shipping.address1 ||
+      !shipping.city ||
+      !shipping.state ||
+      !shipping.zip ||
+      !shipping.country
+    ) {
+      return json({ error: "Missing required shipping fields" }, 400);
+    }
 
-    const totalPrice = items.reduce((sum, item) => sum + Number(item.price) * Number(item.quantity), 0);
-    if (totalPrice <= 0) {
+    const subtotal = items.reduce((sum, item) => sum + Number(item.price) * Number(item.quantity), 0);
+    if (subtotal <= 0) {
       return json({ error: "Total price must be greater than zero" }, 400);
     }
+    const totalPrice = subtotal + shippingFee;
 
     const db = createClient(supabaseUrl, serviceRoleKey, {
       auth: { autoRefreshToken: false, persistSession: false },
@@ -67,6 +90,13 @@ serve(async (req) => {
       .insert({
         customer_name: customerName || null,
         customer_email: email,
+        shipping_address1: shipping.address1,
+        shipping_address2: shipping.address2 || null,
+        shipping_city: shipping.city,
+        shipping_state: shipping.state,
+        shipping_zip: shipping.zip,
+        shipping_country: shipping.country,
+        shipping_phone: shipping.phone || null,
         total_price: Number(totalPrice.toFixed(2)),
         status: "pending",
         payment_method: "stripe_checkout",
@@ -107,6 +137,14 @@ serve(async (req) => {
         [`line_items[${i}][quantity]`]: String(qty),
       });
     }
+    const shippingLineIndex = items.length;
+    lineItems.push({
+      [`line_items[${shippingLineIndex}][price_data][currency]`]: "usd",
+      [`line_items[${shippingLineIndex}][price_data][product_data][name]`]: "Shipping",
+      [`line_items[${shippingLineIndex}][price_data][product_data][description]`]: "Flat shipping fee",
+      [`line_items[${shippingLineIndex}][price_data][unit_amount]`]: String(Math.round(shippingFee * 100)),
+      [`line_items[${shippingLineIndex}][quantity]`]: "1",
+    });
 
     const params = new URLSearchParams();
     params.set("mode", "payment");
