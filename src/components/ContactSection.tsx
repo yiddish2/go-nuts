@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Loader2, Mail } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const CONTACT_EMAIL = "samples11219@gmail.com";
@@ -60,10 +60,6 @@ export default function ContactSection() {
           <h2 className="text-display text-3xl font-bold text-foreground">Contact Us</h2>
           <p className="mt-3 max-w-lg text-sm text-muted-foreground">
             Have a question, comment, or special request? Send us a message and we will respond by email.
-          </p>
-          <p className="mt-4 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium text-foreground">
-            <Mail className="h-4 w-4 text-primary" />
-            {CONTACT_EMAIL}
           </p>
         </div>
 
