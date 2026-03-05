@@ -81,16 +81,16 @@ export default function BagSummaryPanel({
           </div>
         </div>
 
+        <p className="mt-5 text-center text-xs font-medium text-muted-foreground">
+          Flat $4.99 shipping on all orders
+        </p>
         <button
           onClick={onAddToCart}
           disabled={totalOunces === 0}
-          className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 font-semibold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-40 disabled:hover:scale-100"
+          className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 font-semibold text-primary-foreground transition-transform hover:scale-[1.02] disabled:opacity-40 disabled:hover:scale-100"
         >
           <ShoppingCart className="h-4 w-4" /> Add to Cart
         </button>
-        <p className="mt-2 text-center text-xs font-medium text-muted-foreground">
-          Flat $4.99 shipping on all orders
-        </p>
       </div>
     </div>
   );
