@@ -116,6 +116,13 @@ export default function AdminOrders() {
     statusMutation.mutate({ id: order.id, status: next });
   };
 
+  const cancelOrder = (order: Order) => {
+    if (order.status === "cancelled") return;
+    const confirmed = window.confirm(`Cancel order #${order.order_number}?`);
+    if (!confirmed) return;
+    statusMutation.mutate({ id: order.id, status: "cancelled" });
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-16">
@@ -277,6 +284,7 @@ export default function AdminOrders() {
               <TableHead>Total</TableHead>
               <TableHead>Payment</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -320,6 +328,18 @@ export default function AdminOrders() {
                     {order.status}
                   </button>
                 </TableCell>
+                <TableCell>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      cancelOrder(order);
+                    }}
+                    disabled={order.status === "cancelled" || statusMutation.isPending}
+                    className="rounded-full border border-red-200 px-3 py-1 text-xs font-semibold text-red-700 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Cancel Order
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -355,6 +375,15 @@ export default function AdminOrders() {
                       {selectedOrder.status}
                     </button>
                   </p>
+                </div>
+                <div className="flex items-end">
+                  <button
+                    onClick={() => cancelOrder(selectedOrder)}
+                    disabled={selectedOrder.status === "cancelled" || statusMutation.isPending}
+                    className="rounded-full border border-red-200 px-3 py-1 text-xs font-semibold text-red-700 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Cancel Order
+                  </button>
                 </div>
                 <div>
                   <span className="text-muted-foreground">Total</span>
