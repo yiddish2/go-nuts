@@ -12,6 +12,17 @@ export default function Footer() {
           <p className="max-w-md text-sm text-muted-foreground">
             Premium quality nuts and dried fruits sourced from the finest farms around the world. Fresh, natural, and delivered with care.
           </p>
+          <p className="text-xs text-muted-foreground">
+            Done by{" "}
+            <a
+              href="https://yiddishwebpro.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-primary hover:underline"
+            >
+              yiddishwebpro.com
+            </a>
+          </p>
           <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
         </div>
       </div>
