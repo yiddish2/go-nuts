@@ -15,7 +15,7 @@ export default function Header() {
         <Link to="/" className="flex items-center gap-2">
           <Leaf className="h-7 w-7 text-accent" />
           <span className="text-display text-xl font-bold text-foreground">
-            NutHaven
+            Yiddish WebPro's
           </span>
         </Link>
 
