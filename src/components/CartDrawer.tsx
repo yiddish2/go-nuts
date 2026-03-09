@@ -1,11 +1,13 @@
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { SHIPPING_FEE } from "@/lib/pricing";
 
 export default function CartDrawer() {
   const { items, isCartOpen, setIsCartOpen, updateQuantity, removeFromCart, totalPrice } = useCart();
   const navigate = useNavigate();
   const placeholderSrc = "/placeholder.svg?v=1";
+  const orderTotal = totalPrice + SHIPPING_FEE;
 
   if (!isCartOpen) return null;
 
@@ -74,9 +76,17 @@ export default function CartDrawer() {
                 </div>
               </div>
               <div className="border-t p-4">
-                <div className="mb-4 flex justify-between text-lg font-bold text-foreground">
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Subtotal</span>
+                  <span>${totalPrice.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>Shipping</span>
+                  <span>${SHIPPING_FEE.toFixed(2)}</span>
+                </div>
+                <div className="mb-4 mt-2 flex justify-between border-t pt-2 text-lg font-bold text-foreground">
                   <span>Total</span>
-                  <span className="text-primary">${totalPrice.toFixed(2)}</span>
+                  <span className="text-primary">${orderTotal.toFixed(2)}</span>
                 </div>
                 <button
                   onClick={() => { setIsCartOpen(false); navigate("/checkout"); }}

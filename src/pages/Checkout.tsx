@@ -7,10 +7,11 @@ import { ArrowLeft, CheckCircle, Loader2, ShieldCheck } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { SHIPPING_FEE } from "@/lib/pricing";
 
 export default function Checkout() {
   const { items, totalPrice, clearCart } = useCart();
-  const shippingFee = 4.99;
+  const shippingFee = SHIPPING_FEE;
   const orderTotal = totalPrice + shippingFee;
   const [searchParams] = useSearchParams();
   const [submitting, setSubmitting] = useState(false);
