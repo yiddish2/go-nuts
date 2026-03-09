@@ -13,7 +13,7 @@ export default function Footer() {
             Premium quality nuts and dried fruits sourced from the finest farms around the world. Fresh, natural, and delivered with care.
           </p>
           <p className="text-xs text-muted-foreground">
-            Done by{" "}
+            Done by Yiddish WebPro's{" "}
             <a
               href="https://yiddishwebpro.com"
               target="_blank"
