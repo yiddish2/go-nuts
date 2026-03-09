@@ -18,7 +18,7 @@ export default function Footer() {
               href="https://yiddishwebpro.com"
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-semibold text-primary transition-colors hover:bg-primary/20"
+              className="font-semibold text-primary transition-colors hover:text-primary/80 hover:underline"
             >
               Yiddish WebPro&apos;s
             </a>
