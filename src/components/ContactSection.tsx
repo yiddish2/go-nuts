@@ -3,6 +3,7 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const CONTACT_EMAIL = "samples11219@gmail.com";
+const CONTACT_PHONE = "929-287-1614";
 
 export default function ContactSection() {
   const [name, setName] = useState("");
@@ -60,6 +61,13 @@ export default function ContactSection() {
           <h2 className="text-display text-3xl font-bold text-foreground">Contact Us</h2>
           <p className="mt-3 max-w-lg text-sm text-muted-foreground">
             Have a question, comment, or special request? Send us a message and we will respond by email.
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Or call us at{" "}
+            <a href="tel:+19292871614" className="font-semibold text-primary hover:underline">
+              {CONTACT_PHONE}
+            </a>
+            .
           </p>
         </div>
 
