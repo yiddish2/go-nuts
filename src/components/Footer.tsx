@@ -1,5 +1,7 @@
 import { Leaf } from "lucide-react";
 
+const BUSINESS_ADDRESS = "48-25 Metropolitan Ave., Ridgewood NY 11385";
+
 export default function Footer() {
   return (
     <footer className="border-t bg-card">
@@ -24,6 +26,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
+          <p className="text-xs text-muted-foreground">{BUSINESS_ADDRESS}</p>
         </div>
       </div>
     </footer>
