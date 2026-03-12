@@ -12,8 +12,13 @@ export default function Footer() {
           <p className="max-w-md text-sm text-muted-foreground">
             Premium quality nuts and dried fruits sourced from the finest farms around the world. Fresh, natural, and delivered with care.
           </p>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span>Done by</span>
+          <div className="space-y-0.5">
+            <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
+            <p className="text-xs text-muted-foreground">48-25 Metropolitan Ave.</p>
+            <p className="text-xs text-muted-foreground">Ridgewood NY 11385</p>
+          </div>
+          <div className="space-y-0.5 text-xs text-muted-foreground">
+            <p>Done by</p>
             <a
               href="https://yiddishwebpro.com"
               target="_blank"
@@ -22,11 +27,6 @@ export default function Footer() {
             >
               Yiddish WebPro&apos;s
             </a>
-          </div>
-          <div className="space-y-0.5">
-            <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
-            <p className="text-xs text-muted-foreground">48-25 Metropolitan Ave.</p>
-            <p className="text-xs text-muted-foreground">Ridgewood NY 11385</p>
           </div>
         </div>
       </div>
