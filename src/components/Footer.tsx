@@ -25,8 +25,10 @@ export default function Footer() {
               Yiddish WebPro&apos;s
             </a>
           </div>
-          <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
-          <p className="text-xs text-muted-foreground">{BUSINESS_ADDRESS}</p>
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
+            <p className="text-xs text-muted-foreground">{BUSINESS_ADDRESS}</p>
+          </div>
         </div>
       </div>
     </footer>
