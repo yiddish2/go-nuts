@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 const CONTACT_EMAIL = "samples11219@gmail.com";
 const CONTACT_PHONE = "929-287-1614";
+const CONTACT_ADDRESS = "48-25 Metropolitan Ave., Ridgewood NY 11385";
 
 export default function ContactSection() {
   const [name, setName] = useState("");
@@ -69,6 +70,7 @@ export default function ContactSection() {
             </a>
             .
           </p>
+          <p className="mt-3 text-sm text-muted-foreground">{CONTACT_ADDRESS}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border bg-background p-6">

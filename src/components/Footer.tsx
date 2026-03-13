@@ -14,8 +14,6 @@ export default function Footer() {
           </p>
           <div className="space-y-0.5">
             <p className="text-xs text-muted-foreground">© 2026 NutHaven. All rights reserved.</p>
-            <p className="text-xs text-muted-foreground">48-25 Metropolitan Ave.</p>
-            <p className="text-xs text-muted-foreground">Ridgewood NY 11385</p>
           </div>
           <div className="space-y-0.5 text-xs text-muted-foreground">
             <p>Done by</p>
