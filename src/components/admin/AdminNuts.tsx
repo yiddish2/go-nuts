@@ -161,7 +161,7 @@ export default function AdminNuts() {
       {/* Nut list */}
       <div className="space-y-3">
         {nuts?.map((nut) => (
-          <NutRow key={nut.id} nut={nut} onUpdate={updateNut.mutate} onDelete={deleteNut.mutate} />
+          <NutRow key={nut.id} nut={nut} onUpdate={updateNut.mutateAsync} onDelete={deleteNut.mutate} />
         ))}
       </div>
     </div>
@@ -174,7 +174,7 @@ function NutRow({
   onDelete,
 }: {
   nut: Nut;
-  onUpdate: (n: Partial<Nut> & { id: string }) => void;
+  onUpdate: (n: Partial<Nut> & { id: string }) => Promise<unknown>;
   onDelete: (id: string) => void;
 }) {
   const [name, setName] = useState(nut.name);
@@ -184,6 +184,8 @@ function NutRow({
   const [ingredients, setIngredients] = useState(nut.ingredients || "");
   const [newImage, setNewImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [currentImage, setCurrentImage] = useState<string | null>(nut.image);
+  const [saving, setSaving] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const dirty =
@@ -209,33 +211,40 @@ function NutRow({
       toast.error("Invalid input");
       return;
     }
+    setSaving(true);
     let imageUrl = nut.image;
     if (newImage) {
       try {
         imageUrl = await uploadNutImage(newImage);
       } catch (e: any) {
         toast.error("Image upload failed: " + e.message);
+        setSaving(false);
         return;
       }
     }
-    onUpdate({
-      id: nut.id,
-      name: name.trim(),
-      price_per_ounce: p,
-      image: imageUrl,
-      in_stock: inStock,
-      nutrition_facts: serializeNutrition(nutritionData),
-      ingredients: ingredients.trim() || null,
-    });
-    setNewImage(null);
-    setPreviewUrl(null);
-    if (fileRef.current) fileRef.current.value = "";
+    try {
+      await onUpdate({
+        id: nut.id,
+        name: name.trim(),
+        price_per_ounce: p,
+        image: imageUrl,
+        in_stock: inStock,
+        nutrition_facts: serializeNutrition(nutritionData),
+        ingredients: ingredients.trim() || null,
+      });
+      setCurrentImage(imageUrl);
+      setNewImage(null);
+      setPreviewUrl(null);
+      if (fileRef.current) fileRef.current.value = "";
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-lg border bg-card p-4">
       <img
-        src={previewUrl || nut.image || "/placeholder.svg"}
+        src={previewUrl || currentImage || "/placeholder.svg"}
         alt={nut.name}
         className="h-10 w-10 rounded-md object-cover"
       />
@@ -298,10 +307,11 @@ function NutRow({
       {dirty && (
         <button
           onClick={handleSave}
-          className="rounded-full bg-primary p-2 text-primary-foreground hover:scale-105"
+          disabled={saving}
+          className="rounded-full bg-primary p-2 text-primary-foreground hover:scale-105 disabled:opacity-60"
           title="Save changes"
         >
-          <Save className="h-4 w-4" />
+          {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
         </button>
       )}
       <button
