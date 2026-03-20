@@ -30,7 +30,7 @@ export default function NutBuildCard({
     <Popover>
       <PopoverTrigger asChild>
         <div
-          className={`group animate-fade-in overflow-hidden rounded-lg border bg-card transition-shadow hover:shadow-lg cursor-pointer ${
+          className={`group flex h-full animate-fade-in flex-col overflow-hidden rounded-lg border bg-card transition-shadow hover:shadow-lg cursor-pointer ${
             isActive ? "ring-2 ring-primary/40" : ""
           }`}
         >
@@ -50,15 +50,15 @@ export default function NutBuildCard({
               </button>
             )}
           </div>
-          <div className="p-3">
-            <h3 className="text-display text-sm font-semibold text-foreground">
+          <div className="flex flex-1 flex-col p-3">
+            <h3 className="min-h-[2.5rem] text-display text-sm font-semibold text-foreground">
               {nut.name}
             </h3>
             <p className="mt-0.5 text-xs text-muted-foreground">
               ${nut.price_per_ounce.toFixed(2)} / oz
             </p>
 
-            <div className="mt-2 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
+            <div className="mt-auto pt-3 flex items-center justify-between" onClick={(e) => e.stopPropagation()}>
               {isActive ? (
                 <div className="flex w-full items-center gap-1">
                   <button
